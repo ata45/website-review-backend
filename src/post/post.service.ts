@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 import { PostType } from '@prisma/client';
 
 @Injectable()
@@ -40,6 +41,15 @@ export class PostsService {
         cons: dto.cons || [],
         affiliateLink: dto.affiliateLink,
       },
+    });
+  }
+
+  async update(dto: UpdatePostDto){
+    const { id, ...dataToUpdate } = dto;
+
+    return this.prisma.post.update({
+      where: {id},
+      data: dataToUpdate,
     });
   }
 }

@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Patch } from '@nestjs/common';
 import { PostsService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -26,7 +27,33 @@ export class PostsController {
     return {
       statusCode: 201,
       message: "ok",
-      data: data_post
+      data: data_post.id
+    }
+  }
+
+  @Patch()
+  async update(@Body() updatePostDto: UpdatePostDto){
+    const data_post = await this.postsService.create(updatePostDto);
+    return{
+      statusCode: 201,
+      message: "ok",
+      data: data_post.id
+    } 
+  }
+}
+
+@Controller('post-update')
+export class PostsUpdate{
+  constructor(private readonly postsService: PostsService) {}
+
+  @Post()
+  async update(@Body() updatePostDto: UpdatePostDto){
+    const data_post = await this.postsService.update(updatePostDto);
+    
+    return{
+      statusCode: 201,
+      message: "ok",
+      data: data_post.id
     }
   }
 }
