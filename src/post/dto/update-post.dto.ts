@@ -14,4 +14,5 @@ export class UpdatePostDto {
   pros?: string[];
   cons?: string[];
   affiliateLink?: string;
+  
 }

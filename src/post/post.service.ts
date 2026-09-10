@@ -19,9 +19,9 @@ export class PostsService {
     });
   }
 
-  async findBySlug(slug: string) {
+  async findBySlug(id: string) {
     return this.prisma.post.findUnique({
-      where: { slug },
+      where: { id },
     });
   }
 

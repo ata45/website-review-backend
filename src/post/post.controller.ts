@@ -28,7 +28,7 @@ export class PostsController {
       statusCode: 201,
       message: "ok",
       data: data_post.id
-    }
+      }
   }
 
   @Patch()
